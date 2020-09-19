@@ -20,7 +20,7 @@ import React from 'react';
 
 const useStyles = makeStyles((theme) => ({
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -67,6 +67,9 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.up('md')]: {
       width: '20ch',
     },
+  },
+  menuBadge: {
+    marginTop: '5px',
   },
   sectionDesktop: {
     display: 'none',
@@ -178,20 +181,20 @@ export default function PrimarySearchAppBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <IconButton aria-label="show 4 new mails" color="inherit">
+        <IconButton className={classes.menuBadge} aria-label="show 4 new mails" color="inherit">
           <Badge badgeContent={4} color="secondary">
             <MailIcon />
           </Badge>
         </IconButton>
-        <p>Messages</p>
+        <span>Messages</span>
       </MenuItem>
       <MenuItem>
-        <IconButton aria-label="show 11 new notifications" color="inherit">
+        <IconButton className={classes.menuBadge} aria-label="show 11 new notifications" color="inherit">
           <Badge badgeContent={11} color="secondary">
             <NotificationsIcon />
           </Badge>
         </IconButton>
-        <p>Notifications</p>
+        <span>Notifications</span>
       </MenuItem>
       <MenuItem onClick={handleProfileMenuOpen}>
         <IconButton
@@ -202,7 +205,7 @@ export default function PrimarySearchAppBar() {
         >
           <AccountCircle />
         </IconButton>
-        <p>Profile</p>
+        <span>Profile</span>
       </MenuItem>
     </Menu>
   );
@@ -220,7 +223,7 @@ export default function PrimarySearchAppBar() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography className={classes.title} variant="h6" noWrap>
+          <Typography className={classes.title} noWrap>
             Material-UI
           </Typography>
           <div className={classes.search}>
@@ -276,7 +279,7 @@ export default function PrimarySearchAppBar() {
       {renderMenu}
       
       <Drawer open={drawerOpen} onClose={toggleDrawer(false)}>
-      {list(false)}
+        {list(false)}
       </Drawer>
     </div>
   );

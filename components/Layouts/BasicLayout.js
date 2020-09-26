@@ -1,15 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import useScrollTrigger from '@material-ui/core/useScrollTrigger';
-import Box from '@material-ui/core/Box';
 import Container from '@material-ui/core/Container';
 import Fab from '@material-ui/core/Fab';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import Zoom from '@material-ui/core/Zoom';
+import * as locales from '@material-ui/core/locale';
+import { i18n, withTranslation } from '../../i18n'
 
 import PrimarySearchAppBar from '../PrimarySearchAppBar';
+import { TablePagination, TextField } from '@material-ui/core';
+import Pagination from '@material-ui/lab/Pagination';
+import Rating from '@material-ui/lab/Rating';
+import Autocomplete from '@material-ui/lab/Autocomplete';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -56,21 +61,61 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function BasicLayout(props) {
-  const { children } = props;
+function BasicLayout(props) {
+  const { children, t } = props;
+  const [locale, setLocale] = React.useState('viVN');
   return (
     <React.Fragment>
       <CssBaseline />
-      <PrimarySearchAppBar>
-      </PrimarySearchAppBar>
-      <Container>
-        {children}
-      </Container>
-      <ScrollTop {...props}>
-        <Fab color="secondary" size="small" aria-label="scroll back to top">
-          <KeyboardArrowUpIcon />
-        </Fab>
-      </ScrollTop>
+      <ThemeProvider theme={(outerTheme) => createMuiTheme(outerTheme, locales[locale])}>
+        <PrimarySearchAppBar>
+        <button
+          type='button'
+          onClick={(event) => {
+            i18n.changeLanguage(i18n.language === 'en' ? 'vi' : 'en');
+            setLocale(i18n.language === 'en' ? 'viVN' : 'enUS');
+          }}
+        >
+          {t('change-language')}
+        </button>
+        </PrimarySearchAppBar>
+        <Container>
+          <Autocomplete
+            options={Object.keys(locales)}
+            getOptionLabel={(key) => `${key.substring(0, 2)}-${key.substring(2, 4)}`}
+            style={{ width: 300 }}
+            value={locale}
+            disableClearable
+            onChange={(event, newValue) => {
+              setLocale(newValue);
+            }}
+            renderInput={(params) => (
+              <TextField {...params} label="Test" variant="outlined" fullWidth />
+            )}
+          />
+          <TablePagination
+            count={2000}
+            rowsPerPage={10}
+            page={1}
+            component="div"
+            onChangePage={() => { }}
+          />
+          <Pagination count={2000} color="primary" />
+          <Rating defaultValue={4} name="locales" />
+          {children}
+        </Container>
+        <ScrollTop {...props}>
+          <Fab color="secondary" size="small" aria-label="scroll back to top">
+            <KeyboardArrowUpIcon />
+          </Fab>
+        </ScrollTop>
+      </ThemeProvider>
     </React.Fragment>
   );
 }
+
+BasicLayout.getInitialProps = async () => ({
+  namespacesRequired: ['layout'],
+})
+
+export default withTranslation('layout')(BasicLayout);

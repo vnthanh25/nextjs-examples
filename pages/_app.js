@@ -36,7 +36,7 @@ function MyApp(props) {
   );
 }
 
-// MyApp.getInitialProps = async (appContext) => ({ ...await App.getInitialProps(appContext) })
+MyApp.getInitialProps = async (appContext) => ({ ...await App.getInitialProps(appContext) })
 
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,

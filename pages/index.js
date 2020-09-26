@@ -10,16 +10,11 @@ import Link from '../components/Link';
 import Copyright from '../components/Copyright';
 import { Paper } from '@material-ui/core';
 
-function Index({ t }) {
+function Index(props) {
+  const { t } = props;
   return (
-    <Layout>
+    <Layout {...props}>
       <Box my={4}>
-        <button
-          type='button'
-          onClick={() => i18n.changeLanguage(i18n.language === 'en' ? 'vi' : 'en')}
-        >
-          {t('change-language')}
-        </button>
         <Typography variant="h4" component="h1" gutterBottom>
         {t('title')}
         </Typography>

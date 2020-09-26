@@ -1,0 +1,4 @@
+{
+    "error-with-status": "Lỗi {{statusCode}} xãy ra trên server",
+    "error-without-status": "Một lỗi xãy ra trên server"
+}

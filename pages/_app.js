@@ -1,13 +1,16 @@
 import React from 'react';
+import App from 'next/app'
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
+import { appWithTranslation } from '../i18n';
+
 import '../styles/global.css';
 import theme from '../styles/theme';
 
-export default function MyApp(props) {
+function MyApp(props) {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
@@ -33,7 +36,11 @@ export default function MyApp(props) {
   );
 }
 
+// MyApp.getInitialProps = async (appContext) => ({ ...await App.getInitialProps(appContext) })
+
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired,
 };
+
+export default appWithTranslation(MyApp);

@@ -1,21 +1,21 @@
-import React from 'react';
-import App from 'next/app'
-import PropTypes from 'prop-types';
-import Head from 'next/head';
-import { ThemeProvider } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import React from "react";
+import App from "next/app";
+import PropTypes from "prop-types";
+import Head from "next/head";
+import { ThemeProvider } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
 
-import { appWithTranslation } from '../i18n';
+import { appWithTranslation } from "../i18n";
 
-import '../styles/global.css';
-import theme from '../styles/theme';
+import "../styles/global.css";
+import theme from "../styles/theme";
 
 function MyApp(props) {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
     // Remove the server-side injected CSS.
-    const jssStyles = document.querySelector('#jss-server-side');
+    const jssStyles = document.querySelector("#jss-server-side");
     if (jssStyles) {
       jssStyles.parentElement.removeChild(jssStyles);
     }
@@ -25,7 +25,10 @@ function MyApp(props) {
     <React.Fragment>
       <Head>
         <title>My page</title>
-        <meta name="viewport" content="minimum-scale=1, initial-scale=1, width=device-width" />
+        <meta
+          name="viewport"
+          content="minimum-scale=1, initial-scale=1, width=device-width"
+        />
       </Head>
       <ThemeProvider theme={theme}>
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
@@ -36,7 +39,9 @@ function MyApp(props) {
   );
 }
 
-MyApp.getInitialProps = async (appContext) => ({ ...await App.getInitialProps(appContext) })
+MyApp.getInitialProps = async (appContext) => ({
+  ...(await App.getInitialProps(appContext)),
+});
 
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,

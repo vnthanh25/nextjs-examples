@@ -9,6 +9,8 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import Pagination from "@material-ui/lab/Pagination";
 import Rating from "@material-ui/lab/Rating";
 import React from "react";
+import { useSelector } from "react-redux";
+import Clock from "../../components/Clock";
 import ComSearchAppBar from "../../components/Navigations/ComSearchAppBar";
 import ComScrollTop from "../../components/UI/ComScrollTop.js";
 import { i18n, withTranslation } from "../../i18n";
@@ -16,6 +18,8 @@ import { i18n, withTranslation } from "../../i18n";
 const ComBasicLayout = (props) => {
   const { children, t } = props;
   const [staLocale, setStaLocale] = React.useState("viVN");
+  const light = useSelector((state) => state.light);
+  const lastUpdate = useSelector((state) => state.lastUpdate);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -32,6 +36,7 @@ const ComBasicLayout = (props) => {
           >
             {t("change-language")}
           </button>
+          <Clock lastUpdate={lastUpdate} light={light} />
         </ComSearchAppBar>
         <Container>
           <Autocomplete

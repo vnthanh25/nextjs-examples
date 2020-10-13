@@ -30,8 +30,8 @@ const ComBasicLayout = (props) => {
           <button
             type="button"
             onClick={(event) => {
-              i18n.changeLanguage(i18n.language === "en" ? "vi" : "en");
-              setStaLocale(i18n.language === "en" ? "viVN" : "enUS");
+              i18n.changeLanguage(props.i18n.language === "en" ? "vi" : "en");
+              setStaLocale(props.i18n.language === "en" ? "viVN" : "enUS");
             }}
           >
             {t("change-language")}
@@ -80,8 +80,8 @@ const ComBasicLayout = (props) => {
   );
 };
 
-ComBasicLayout.getInitialProps = async () => ({
-  namespacesRequired: ["layout"],
-});
+// ComBasicLayout.getInitialProps = async () => ({
+//   namespacesRequired: ["layout"],
+// });
 
 export default withTranslation("layout")(ComBasicLayout);

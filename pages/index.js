@@ -53,7 +53,7 @@ Index.propTypes = {
 };
 
 Index.getInitialProps = async () => ({
-  namespacesRequired: ["common", "home"],
+  namespacesRequired: ["common", "home", "layout"],
 });
 
 // Index.defaultProps = {

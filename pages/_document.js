@@ -1,13 +1,15 @@
 import React from "react";
 import Document, { Html, Head, Main, NextScript } from "next/document";
 import { ServerStyleSheets } from "@material-ui/core/styles";
+import { lngFromReq } from "next-i18next/dist/commonjs/utils";
 
 import theme from "../styles/theme";
 
 export default class MyDocument extends Document {
   render() {
+    const { lng } = this.props;
     return (
-      <Html lang="en">
+      <Html lang={lng}>
         <Head>
           {/* PWA primary color */}
           <meta name="theme-color" content={theme.palette.primary.main} />
@@ -61,8 +63,14 @@ MyDocument.getInitialProps = async (ctx) => {
 
   const initialProps = await Document.getInitialProps(ctx);
 
+  const lng = lngFromReq(ctx.req);
+  const additionalProps = {
+    lng,
+  };
+
   return {
     ...initialProps,
+    ...additionalProps,
     // Styles fragment is rendered after the app and page rendering finish.
     styles: [
       ...React.Children.toArray(initialProps.styles),

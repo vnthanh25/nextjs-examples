@@ -1,5 +1,5 @@
 import { all, call, delay, put, take, takeLatest } from "redux-saga/effects";
-import { actionTypes, failure, loadDataSuccess, tickClock } from "../actions";
+import { actionTypes, tickClock } from "../actions";
 
 function* runClockSaga() {
   yield take(actionTypes.START_CLOCK);
@@ -20,10 +20,7 @@ function* loadDataSaga() {
 }
 
 function* rootSaga() {
-  yield all([
-    call(runClockSaga),
-    takeLatest(actionTypes.LOAD_DATA, loadDataSaga),
-  ]);
+  yield all([call(runClockSaga)]);
 }
 
 export default rootSaga;

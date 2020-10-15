@@ -13,10 +13,10 @@ import MoreIcon from "@material-ui/icons/MoreVert";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
-import ComLeftDrawer from "./ComLeftDrawer.js";
-import { useStyles } from "./ComSearchAppBar.jss";
+import LeftDrawer from "./LeftDrawer.js";
+import { useStyles } from "./SearchAppBar.jss";
 
-const ComSearchAppBar = (props) => {
+const SearchAppBar = (props) => {
   const { children } = props;
   const classes = useStyles();
   const [staAnchorEl, setStaAnchorEl] = React.useState(null);
@@ -182,7 +182,7 @@ const ComSearchAppBar = (props) => {
       {renderMobileMenu}
       {renderMenu}
       {/* Go to top */}
-      <ComLeftDrawer
+      <LeftDrawer
         fncToggleDrawerRef={(fncToggleDrawerRef) =>
           (staComLefDrawer.fncToggleDrawer = fncToggleDrawerRef)
         }
@@ -193,4 +193,4 @@ const ComSearchAppBar = (props) => {
   );
 };
 
-export default ComSearchAppBar;
+export default SearchAppBar;

@@ -4,11 +4,11 @@ import clsx from "clsx";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import React from "react";
-import NextComposed from "./ComNextComposed";
+import NextComposed from "./NextComposed";
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
-const ComLink = (props) => {
+const Link = (props) => {
   const {
     href,
     activeClassName = "active",
@@ -46,7 +46,7 @@ const ComLink = (props) => {
   );
 };
 
-ComLink.propTypes = {
+Link.propTypes = {
   activeClassName: PropTypes.string,
   as: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   className: PropTypes.string,
@@ -58,5 +58,5 @@ ComLink.propTypes = {
 };
 
 export default React.forwardRef((props, ref) => (
-  <ComLink {...props} innerRef={ref} />
+  <Link {...props} innerRef={ref} />
 ));

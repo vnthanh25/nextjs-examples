@@ -12,7 +12,7 @@ import Fab from "@material-ui/core/Fab";
 import KeyboardArrowUpIcon from "@material-ui/icons/KeyboardArrowUp";
 import Zoom from "@material-ui/core/Zoom";
 
-import ComSearchAppBar from "../../components/Navigations/ComSearchAppBar";
+import SearchAppBar from "../../components/Navigations/SearchAppBar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,11 +61,11 @@ ScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default function ComBasicLayout(props) {
+export default function BasicLayout(props) {
   return (
     <React.Fragment>
       <CssBaseline />
-      <ComSearchAppBar></ComSearchAppBar>
+      <SearchAppBar></SearchAppBar>
       <Container>
         <Box my={2}>
           {[...new Array(12)]

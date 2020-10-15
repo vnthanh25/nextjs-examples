@@ -1,9 +1,9 @@
 import useScrollTrigger from "@material-ui/core/useScrollTrigger";
 import Zoom from "@material-ui/core/Zoom";
 import PropTypes from "prop-types";
-import { useStyles } from "./ComScrollTop.jss";
+import { useStyles } from "./ScrollTop.jss";
 
-const ComScrollTop = (props) => {
+const ScrollTop = (props) => {
   const { children, window } = props;
   const classes = useStyles();
   // Note that you normally won't need to set the window ref as useScrollTrigger
@@ -37,7 +37,7 @@ const ComScrollTop = (props) => {
   );
 };
 
-ComScrollTop.propTypes = {
+ScrollTop.propTypes = {
   children: PropTypes.element.isRequired,
   /**
    * Injected by the documentation to work in an iframe.
@@ -46,4 +46,4 @@ ComScrollTop.propTypes = {
   window: PropTypes.func,
 };
 
-export default ComScrollTop;
+export default ScrollTop;

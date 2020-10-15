@@ -1,14 +1,14 @@
 import Link from "@material-ui/core/Link";
 import Typography from "@material-ui/core/Typography";
 import React from "react";
-import ComLightBulbIcon from "./ComLightBulbIcon";
-import { useStyles } from "./ComProTip.jss";
+import LightBulbIcon from "./LightBulbIcon";
+import { useStyles } from "./ProTip.jss";
 
 const ProTip = () => {
   const classes = useStyles();
   return (
     <Typography className={classes.root} color="textSecondary">
-      <ComLightBulbIcon className={classes.lightBulb} />
+      <LightBulbIcon className={classes.lightBulb} />
       Pro tip: See more{" "}
       <Link href="https://material-ui.com/getting-started/templates/">
         templates

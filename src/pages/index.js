@@ -3,10 +3,10 @@ import Box from "@material-ui/core/Box";
 import Typography from "@material-ui/core/Typography";
 import PropTypes from "prop-types";
 import React from "react";
-import ComCopyright from "../components/UI/ComCopyright";
-import ComLink from "../components/UI/ComLink";
-import ComProTip from "../components/UI/ComProTip";
-import ComBasicLayout from "../hocs/Layouts/ComBasicLayout";
+import Copyright from "../components/UIs/Copyright";
+import Link from "../components/UIs/Link";
+import ProTip from "../components/UIs/ProTip";
+import BasicLayout from "../hocs/Layouts/BasicLayout";
 import { withTranslation } from "../i18n";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
@@ -23,14 +23,14 @@ function Index(props) {
 
   const { t } = props;
   return (
-    <ComBasicLayout {...props}>
+    <BasicLayout {...props}>
       <Box my={4}>
         <Typography variant="h4" component="h1" gutterBottom>
           {/* {t("title")} */}
         </Typography>
-        <ComLink href="/about" color="secondary">
+        <Link href="/about" color="secondary">
           Go to the about page
-        </ComLink>
+        </Link>
         <Paper>
           {[...new Array(12)]
             .map(
@@ -41,10 +41,10 @@ function Index(props) {
             )
             .join("\n")}
         </Paper>
-        <ComProTip />
-        <ComCopyright />
+        <ProTip />
+        <Copyright />
       </Box>
-    </ComBasicLayout>
+    </BasicLayout>
   );
 }
 

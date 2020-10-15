@@ -10,9 +10,9 @@ import MailIcon from "@material-ui/icons/Mail";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import clsx from "clsx";
 import React from "react";
-import { useStyles } from "./ComLeftDrawer.jss";
+import { useStyles } from "./LeftDrawer.jss";
 
-const ComLeftDrawer = (props) => {
+const LeftDrawer = (props) => {
   const { fncToggleDrawerRef, isDrawerOpen = false, isMobile } = props;
   const classes = useStyles();
   const [staIsDrawerOpen, setStaIsDrawerOpen] = React.useState(isDrawerOpen);
@@ -65,4 +65,4 @@ const ComLeftDrawer = (props) => {
   );
 };
 
-export default ComLeftDrawer;
+export default LeftDrawer;

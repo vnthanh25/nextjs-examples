@@ -11,11 +11,11 @@ import Rating from "@material-ui/lab/Rating";
 import React from "react";
 import { useSelector } from "react-redux";
 import Clock from "../../components/Clock";
-import ComSearchAppBar from "../../components/Navigations/ComSearchAppBar";
-import ComScrollTop from "../../components/UI/ComScrollTop.js";
+import SearchAppBar from "../../components/Navigations/SearchAppBar";
+import ScrollTop from "../../components/UIs/ScrollTop.js";
 import { i18n, withTranslation } from "../../i18n";
 
-const ComBasicLayout = (props) => {
+const BasicLayout = (props) => {
   const { children, t } = props;
   const [staLocale, setStaLocale] = React.useState("viVN");
   const light = useSelector((state) => state.light);
@@ -26,7 +26,7 @@ const ComBasicLayout = (props) => {
       <ThemeProvider
         theme={(outerTheme) => createMuiTheme(outerTheme, locales[staLocale])}
       >
-        <ComSearchAppBar>
+        <SearchAppBar>
           <button
             type="button"
             onClick={(event) => {
@@ -37,7 +37,7 @@ const ComBasicLayout = (props) => {
             {t("change-language")}
           </button>
           <Clock lastUpdate={lastUpdate} light={light} />
-        </ComSearchAppBar>
+        </SearchAppBar>
         <Container>
           <Autocomplete
             options={Object.keys(locales)}
@@ -70,18 +70,18 @@ const ComBasicLayout = (props) => {
           <Rating defaultValue={4} name="locales" />
           {children}
         </Container>
-        <ComScrollTop {...props}>
+        <ScrollTop {...props}>
           <Fab color="secondary" size="small" aria-label="scroll back to top">
             <KeyboardArrowUpIcon />
           </Fab>
-        </ComScrollTop>
+        </ScrollTop>
       </ThemeProvider>
     </React.Fragment>
   );
 };
 
-// ComBasicLayout.getInitialProps = async () => ({
+// BasicLayout.getInitialProps = async () => ({
 //   namespacesRequired: ["layout"],
 // });
 
-export default withTranslation("layout")(ComBasicLayout);
+export default withTranslation("layout")(BasicLayout);

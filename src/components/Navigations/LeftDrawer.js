@@ -5,17 +5,22 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  makeStyles,
 } from "@material-ui/core";
 import MailIcon from "@material-ui/icons/Mail";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import clsx from "clsx";
-import React from "react";
-import { useStyles } from "./LeftDrawer.jss";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 
+/************************************************** Constructor */
 const LeftDrawer = (props) => {
-  const { fncToggleDrawerRef, isDrawerOpen = false, isMobile } = props;
   const classes = useStyles();
-  const [staIsDrawerOpen, setStaIsDrawerOpen] = React.useState(isDrawerOpen);
+
+  const [staIsDrawerOpen, setStaIsDrawerOpen] = useState(false);
+  if (props.isDrawerOpen) {
+    //setStaIsDrawerOpen(props.isDrawerOpen);
+  }
 
   const fncToggleDrawer = (isOpen) => (event) => {
     if (
@@ -24,24 +29,39 @@ const LeftDrawer = (props) => {
     ) {
       return;
     }
-    setStaIsDrawerOpen(isOpen);
+    //setStaIsDrawerOpen(isOpen);
   };
 
-  fncToggleDrawerRef((isOpen) => setStaIsDrawerOpen(isOpen));
+  const fncMenuItemOnClick = (event) => {};
 
+  // Constructor.
+  useEffect(() => {
+    if (props.fncToggleDrawerRef) {
+      // Call back parent to set a function ref.
+      props.fncToggleDrawerRef((isOpen) => {
+        setStaIsDrawerOpen(isOpen);
+      });
+    }
+  }, []);
+
+  /************************************************** render */
   return (
-    <Drawer open={staIsDrawerOpen} onClose={fncToggleDrawer(false)}>
+    <Drawer open={staIsDrawerOpen} onClose={props.fncDrawerClose}>
       <div
         className={clsx(classes.list, {
-          [classes.fullList]: isMobile,
+          [classes.fullList]: props.isMobile,
         })}
         role="presentation"
-        onClick={fncToggleDrawer(false)}
-        onKeyDown={fncToggleDrawer(false)}
       >
+        {/* List items 1 */}
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-            <ListItem button key={text}>
+            <ListItem
+              button
+              key={text}
+              onClick={(event) => props.fncMenuItemOnClick(event)}
+              onKeyDown={(event) => props.fncMenuItemOnClick(event)}
+            >
               <ListItemIcon>
                 {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
               </ListItemIcon>
@@ -49,7 +69,10 @@ const LeftDrawer = (props) => {
             </ListItem>
           ))}
         </List>
+
         <Divider />
+
+        {/* List items 2 */}
         <List>
           {["All mail", "Trash", "Spam"].map((text, index) => (
             <ListItem button key={text}>
@@ -64,5 +87,15 @@ const LeftDrawer = (props) => {
     </Drawer>
   );
 };
+
+/************************************************** styles */
+const useStyles = makeStyles((theme) => ({
+  list: {
+    width: 250,
+  },
+  fullList: {
+    width: "auto",
+  },
+}));
 
 export default LeftDrawer;

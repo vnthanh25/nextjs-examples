@@ -1,3 +1,4 @@
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Badge from "@material-ui/core/Badge";
 import IconButton from "@material-ui/core/IconButton";
@@ -12,10 +13,18 @@ import MenuIcon from "@material-ui/icons/Menu";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
+
+import Banner from "./Banner.js";
 import LeftDrawer from "./LeftDrawer.js";
 import { useStyles } from "./SearchAppBar.jss";
 
+/************************************************** styles */
+
+/************************************************** Constructor */
+/**
+ *
+ * @param {*} props
+ */
 const SearchAppBar = (props) => {
   const { children } = props;
   const classes = useStyles();
@@ -23,17 +32,32 @@ const SearchAppBar = (props) => {
   const [staMobileMoreAnchorEl, setStaMobileMoreAnchorEl] = React.useState(
     null
   );
-  const [staComLefDrawer] = React.useState({});
+
+  const [staLefDrawer] = React.useState({});
 
   const isMenuOpen = Boolean(staAnchorEl);
   const isMobileMenuOpen = Boolean(staMobileMoreAnchorEl);
 
-  const fncToggleDrawer = (isDrawerOpen) => (event) => {
-    staComLefDrawer.fncToggleDrawer(isDrawerOpen);
+  const fncMenuItemOnClick = React.useCallback((event) => {
+    staLefDrawer.fncToggleDrawer(false);
+  }, []);
+
+  const fncToggleDrawerRef = (fncToggleDrawerRef) => {
+    staLefDrawer.fncToggleDrawer = fncToggleDrawerRef;
   };
+
+  const fncToggleDrawer = React.useCallback((isOpen) => {
+    if (staLefDrawer.fncToggleDrawer) {
+      staLefDrawer.fncToggleDrawer(isOpen);
+    }
+  }, []);
 
   const fncHandleProfileMenuOpen = (event) => {
     setStaAnchorEl(event.currentTarget);
+  };
+
+  const fncDrawerClose = (event) => {
+    console.log("fncDrawerClose");
   };
 
   const fncHandleMobileMenuClose = () => {
@@ -118,18 +142,7 @@ const SearchAppBar = (props) => {
     <div className={classes.grow}>
       <AppBar position="static">
         <Toolbar id="topAnchor">
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="open drawer"
-            onClick={fncToggleDrawer(true)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography className={classes.title} noWrap>
-            Material-UI
-          </Typography>
+          <Banner fncToggleDrawer={fncToggleDrawer} />
           <div className={classes.search}>
             <div className={classes.searchIcon}>
               <SearchIcon />
@@ -183,11 +196,11 @@ const SearchAppBar = (props) => {
       {renderMenu}
       {/* Go to top */}
       <LeftDrawer
-        fncToggleDrawerRef={(fncToggleDrawerRef) =>
-          (staComLefDrawer.fncToggleDrawer = fncToggleDrawerRef)
-        }
         isDrawerOpen={true}
         isMobile={false}
+        fncToggleDrawerRef={fncToggleDrawerRef}
+        fncMenuItemOnClick={fncMenuItemOnClick}
+        fncDrawerClose={fncDrawerClose}
       />
     </div>
   );
